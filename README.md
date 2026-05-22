@@ -1,10 +1,33 @@
-# Auto - Facebook Group Posting Extension
+# ⚠️ AUTO - NOT FOR PUBLIC USE
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![Chrome Web Store](https://img.shields.io/badge/chrome%20web%20store-supported-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-AGPL--3.0-red)
+![Status](https://img.shields.io/badge/status-ARCHIVED-inactive)
 
-Auto is a Chrome extension that automates Facebook group posting. This is a clean, reverse-engineered build with full source code transparency.
+## ⛔ DO NOT USE THIS SOFTWARE
+
+**This repository is archived and provided for reference purposes ONLY.**
+
+This is a reverse-engineered tool that automates Facebook posting. **You should not use this software.**
+
+**Why you shouldn't use it:**
+- ❌ Violates Facebook's Terms of Service
+- ❌ Can result in account suspension or permanent ban
+- ❌ May violate laws regarding computer fraud and unauthorized access
+- ❌ Not officially supported or maintained
+- ❌ Poses security and privacy risks
+- ❌ Subject to legal action by Meta Platforms
+
+**This code is provided "as-is" with NO WARRANTY of any kind.**
+
+---
+
+# Auto - Facebook Group Posting Extension (ARCHIVED)
+
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-AGPL--3.0-red)
+
+Auto is a Chrome extension that automates Facebook group posting. This is a clean, reverse-engineered build with full source code transparency (for educational/archival purposes only).
 
 ## Features
 
@@ -196,7 +219,13 @@ We welcome contributions! Please:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) - see the [LICENSE](LICENSE) file for details.
+
+**Key restrictions:**
+- You must share modifications under the same license
+- Not for commercial use
+- Not for unauthorized platform automation
+- See LICENSE file for complete terms
 
 ## Version History
 
@@ -215,16 +244,51 @@ For issues, questions, or suggestions:
 - Check existing discussions
 - Review the [Troubleshooting](#troubleshooting) section
 
-## Disclaimer
+## Legal Disclaimer & Important Notice
 
-This tool is for personal use only. Users are responsible for:
-- Complying with Facebook's Terms of Service
-- Respecting group policies and user privacy
-- Obtaining necessary permissions
-- Any consequences of automated posting
+### ⚠️ This Software is NOT for Public Use
 
-**Use responsibly and ethically.**
+**This repository is archived.** This software is provided for **archival and educational reference purposes ONLY.**
+
+**DO NOT use this software for:**
+- Posting to Facebook or any social media platform
+- Circumventing platform restrictions or policies
+- Automating user account actions
+- Commercial purposes of any kind
+- Any activity that violates Facebook's Terms of Service
+
+### Legal Liability
+
+By accessing this code, you acknowledge that:
+
+1. **You assume full responsibility** for any use of this software
+2. **The author is not liable** for any damages, legal consequences, or account bans
+3. **You may violate laws** including:
+   - Computer Fraud and Abuse Act (CFAA)
+   - Terms of Service violations (potential civil liability)
+   - Local cybercrime legislation
+4. **Facebook/Meta may pursue legal action** against users of such tools
+5. **Your account may be permanently banned** without warning
+
+### Why This Code Exists
+
+This repository is provided for:
+- Security researchers and educators
+- Historical/archival purposes
+- Code review and learning
+- NOT for active deployment or use
+
+### Ethical Considerations
+
+Automated posting on social media platforms:
+- Violates platform terms of service
+- Can constitute spam or harassment
+- May violate user privacy
+- Disrupts community standards
+- Can harm other users
+
+**Use technology responsibly and ethically.**
 
 ---
 
-**Made with ❤️ | Version 1.0.0**
+**Made with ❤️ | Version 1.0.0 | ARCHIVED - NOT FOR USE**
