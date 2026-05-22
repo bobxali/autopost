@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Auto",
+  "version": "1.0.0",
+  "description": "Auto Facebook group posting extension (clean reverse-engineered build).",
+  "action": {
+    "default_title": "Auto"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "declarativeNetRequest",
+    "alarms",
+    "downloads",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "https://www.facebook.com/*",
+    "https://facebook.com/*",
+    "https://*.facebook.com/*",
+    "https://upload.facebook.com/*",
+    "https://vupload-edge.facebook.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "fb_origin_rule",
+        "enabled": true,
+        "path": "networkrule.json"
+      }
+    ]
+  },
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  }
+}

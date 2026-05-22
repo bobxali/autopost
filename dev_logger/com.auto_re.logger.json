@@ -1,0 +1,9 @@
+{
+    "path":  "D:\\FB_Agent_Stabilized\\chrome_extension_auto_re\\dev_logger\\native_host.cmd",
+    "description":  "Auto RE local developer logger",
+    "name":  "com.auto_re.logger",
+    "allowed_origins":  [
+                            "chrome-extension://plldbfglgdilgohhhbpaenamejamhehh/"
+                        ],
+    "type":  "stdio"
+}

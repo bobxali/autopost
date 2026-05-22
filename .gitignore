@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Chrome extension
+chrome-profile/
+test-results/
+
+# Logs
+logs/
+*.log
+
+# Build outputs
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+Thumbs.db
+.DS_Store
+*.exe
+
+# Temp files
+temp/
+tmp/
+*.tmp
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Native logging (local development)
+%LOCALAPPDATA%/AutoRe/
+dev_logger/events.ndjson

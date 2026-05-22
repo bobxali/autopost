@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto</title>
+  <link rel="stylesheet" href="./popup.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">Auto</div>
+      <div class="brandProfileBox">
+        <div id="brandProfileDisplay" class="brandProfileName">Profile: -</div>
+        <div class="brandProfileEdit">
+          <input id="brandProfileInput" type="text" placeholder="Profile display name" />
+          <button id="btnBrandProfileSave" class="btn small">Save</button>
+        </div>
+      </div>
+      <div class="sectionLabel">Accounts</div>
+      <div class="accountControls">
+        <select id="accountSelect"></select>
+        <button id="btnSaveAccount" class="btn small">Save Current</button>
+      </div>
+      <div class="accountMeta" id="accountMeta">
+        <div id="accountLabelLine">No account selected</div>
+        <div class="muted" id="accountIdLine"></div>
+      </div>
+
+      <div class="sectionLabel">Main Menu</div>
+        <nav class="menu">
+          <button class="menuItem active" data-view="results">Campaign logs</button>
+          <button class="menuItem" data-view="builder">Campaign builder</button>
+          <button class="menuItem" data-view="groups">Groups</button>
+          <button class="menuItem" data-view="error_monitor">Error Monitor</button>
+          <button class="menuItem" data-view="failed_groups">Failed Groups</button>
+        </nav>
+
+      <div class="sectionLabel">Actions</div>
+      <div class="stack">
+        <button id="btnCheckLogin" class="btn">Check Login</button>
+        <button id="btnFetchGroups" class="btn">Sync Joined Groups</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="page" data-view-panel="results">
+        <header class="topbar">
+          <div>
+            <h1>Campaign Results</h1>
+            <p>Track and audit your automated campaigns</p>
+          </div>
+          <div class="topActions">
+            <button id="btnRefreshView" class="btn small">Refresh View</button>
+            <div class="statusPill" id="status">Ready</div>
+          </div>
+        </header>
+
+        <section class="panel">
+          <div class="profileHeader">
+            <h2 id="activeProfileTitle">Profile Campaigns</h2>
+            <div id="activeProfileSub" class="muted">No profile selected</div>
+          </div>
+
+          <div class="statsGrid">
+            <div class="statCard">
+              <div class="statLabel">Total</div>
+              <div class="statValue" id="statTotal">0</div>
+            </div>
+            <div class="statCard">
+              <div class="statLabel">Completed</div>
+              <div class="statValue good" id="statCompleted">0</div>
+            </div>
+            <div class="statCard">
+              <div class="statLabel">Pending/Processing</div>
+              <div class="statValue warn" id="statPending">0</div>
+            </div>
+            <div class="statCard">
+              <div class="statLabel">Failed</div>
+              <div class="statValue bad" id="statFailed">0</div>
+            </div>
+          </div>
+
+          <div class="filters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="completed">Completed</button>
+            <button class="chip" data-filter="pending">Pending</button>
+            <button class="chip" data-filter="failed">Failed</button>
+            <input id="campaignSearch" type="text" placeholder="Search campaigns..." />
+          </div>
+
+          <div class="resultPane">
+              <h2>Campaign Results</h2>
+              <div class="row">
+                <button id="btnClearResults" class="btn small danger">Clear Results</button>
+              </div>
+              <div class="tableWrap campaigns">
+                <table id="campaignsTable">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Campaign</th>
+                      <th>Groups List</th>
+                      <th>Scheduled</th>
+                      <th>Status</th>
+                    <th>Rate</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="campaignsBody"></tbody>
+                </table>
+                <div id="campaignEmptyState" class="emptyState hidden">
+                  No campaigns for this profile yet.
+                </div>
+              </div>
+
+              <div class="logsPanel">
+                <div class="logsHeader">
+                  <h2>Live Logs</h2>
+                  <div id="logCountdown" class="badge">Next post: -</div>
+                  <div id="syncCountdown" class="badge">Sync: -</div>
+                  <button id="btnClearLogs" class="btn small">Clear</button>
+                </div>
+                <div id="logs" class="logViewer"></div>
+              </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="page hidden" data-view-panel="builder">
+        <header class="topbar">
+          <div>
+            <h1>Campaign Builder</h1>
+            <p>Create and schedule new campaigns</p>
+          </div>
+          <div class="topActions">
+            <div class="statusPill" id="builderStatus">Ready</div>
+          </div>
+        </header>
+
+        <section class="panel">
+          <div class="builderPane">
+            <div class="composerBox">
+              <h2>Save Post</h2>
+              <label>Post name <input id="postName" type="text" placeholder="e.g., baabda listing v1" /></label>
+              <textarea id="postText" placeholder="Write post text..."></textarea>
+              <div class="row">
+                <label>Images <input id="imageFiles" type="file" accept="image/*" multiple /></label>
+                <span id="imageState" class="badge">Images: 0</span>
+              </div>
+              <div class="row">
+                <button id="btnSavePostTemplate" class="btn">Save Post</button>
+              </div>
+            </div>
+
+            <div class="composerBox">
+              <div class="postListHeader">
+                <h2>Saved Posts</h2>
+                <div class="muted">Toggle posts on/off, then expand to edit timing and groups.</div>
+              </div>
+              <div id="postList" class="postList"></div>
+            </div>
+
+            <div class="previewPanel">
+              <div class="previewHeader">
+                <h2>Preview Strategy</h2>
+                <div class="row">
+                  <label>Time interval
+                    <select id="intervalPreset">
+                      <option value="default">Default (post settings)</option>
+                      <option value="normal">Normal</option>
+                      <option value="safe">Safe</option>
+                      <option value="super_safe">Super Safe</option>
+                    </select>
+                  </label>
+                  <label>Start delay (min)
+                    <input id="startDelayMinutes" type="number" min="0.5" step="0.5" value="0.5" />
+                  </label>
+                  <span id="intervalHint" class="muted">Default: uses each post’s min/max</span>
+                </div>
+                <div id="previewActionHint" class="previewActionHint">1) Build Preview first, then 2) Start Posting</div>
+                <div class="row previewActionsRow">
+                  <button id="btnPreview" class="btn small">Build Preview</button>
+                  <button id="btnStart" class="btn small">Start Posting</button>
+                  <button id="btnGoLiveLogs" class="btn small">Live Logs</button>
+                  <button id="btnStop" class="btn small danger">Stop</button>
+                </div>
+              </div>
+              <div id="previewLog" class="logViewer preview">Enable posts and click Build Preview.</div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="page hidden" data-view-panel="groups">
+        <header class="topbar">
+          <div>
+            <h1>Groups</h1>
+            <p>Create and manage saved group lists per profile</p>
+          </div>
+          <div class="topActions">
+            <button id="btnRefreshGroupsPage" class="btn small">Refresh Groups</button>
+          </div>
+        </header>
+
+        <section class="panel">
+          <div class="composerBox">
+            <h2>Save Group List</h2>
+            <div class="row">
+              <label>List name <input id="groupListName" type="text" placeholder="e.g., Lebanon Real Estate" /></label>
+              <button id="btnSaveGroupList" class="btn">Save List</button>
+            </div>
+          </div>
+          <div class="groupsPanel">
+            <h2>Joined Groups (active profile)</h2>
+            <div class="row">
+              <label>Sort
+                <select id="groupsSortMode">
+                  <option value="default">Default</option>
+                  <option value="name_asc">Name A-Z</option>
+                  <option value="name_desc">Name Z-A</option>
+                  <option value="members_desc">Members high-low</option>
+                  <option value="privacy">Privacy</option>
+                  <option value="issue_first">Issue first</option>
+                </select>
+              </label>
+              <button id="btnToggleGroupReorder" class="btn small">Reorder: Off</button>
+              <button id="btnSaveGroupOrder" class="btn small">Save Order</button>
+            </div>
+            <div class="row">
+              <input id="groupsSearch" type="text" placeholder="Search groups..." />
+            </div>
+            <div id="groupsCards" class="groupsCards"></div>
+            <div class="tableWrap groups hidden">
+              <table id="groupsPageTable">
+                <tbody id="groupsPageBody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="composerBox">
+            <h2>Saved Lists</h2>
+            <div id="groupLists"></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="page hidden" data-view-panel="failed_groups">
+        <header class="topbar">
+          <div>
+            <h1>Failed Groups</h1>
+            <p>Groups where posting failed</p>
+          </div>
+          <div class="topActions">
+            <button id="btnClearFailedGroups" class="btn small danger">Clear Failed</button>
+          </div>
+        </header>
+
+        <section class="panel">
+          <div class="tableWrap groups">
+            <table>
+              <thead>
+                <tr><th>Group ID</th><th>Group Name</th><th>Group Link</th><th>Error</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="failedGroupsBody"></tbody>
+            </table>
+            <div id="failedGroupsEmpty" class="emptyState hidden">
+              No failed groups yet.
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="page hidden" data-view-panel="error_monitor">
+        <header class="topbar">
+          <div>
+            <h1>Error Monitor</h1>
+            <p>Live maintenance errors for this profile</p>
+          </div>
+          <div class="topActions">
+            <button id="btnExportDevLogs" class="btn small">Export Dev Logs</button>
+            <button id="btnClearErrorLogs" class="btn small danger">Clear Errors</button>
+          </div>
+        </header>
+
+        <section class="panel">
+          <div class="tableWrap campaigns">
+            <table>
+              <thead>
+                <tr><th>Time</th><th>Source</th><th>Campaign</th><th>Group</th><th>Error</th></tr>
+              </thead>
+              <tbody id="errorLogsBody"></tbody>
+            </table>
+            <div id="errorLogsEmpty" class="emptyState hidden">
+              No errors yet.
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="detailsModal" class="modal hidden">
+    <div class="modalBody">
+      <div class="modalHeader">
+        <h2>Campaign Details</h2>
+        <button id="btnCloseModal" class="btn dark">Close</button>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="group_posts">Group Posts</button>
+        <button class="tab" data-tab="media">Media</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="./popup.js"></script>
+</body>
+</html>
